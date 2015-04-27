@@ -5,11 +5,12 @@ spec = Gem::Specification.load("#{ plugin }.gemspec")
 lib = File.expand_path('../lib')
 version_file = "lib/#{ plugin }/version.rb"
 
+
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require_relative "../../#{ plugin }/lib/#{ plugin }"
 require 'date'
 require 'json'
-require 'base64'
+# require 'base64'
 
 ## Environment Setup
 
@@ -17,18 +18,21 @@ require 'base64'
 # Environment variables are not used due to the design of codeship, each project
 # has its own set of variables so a key would need to be added or changed
 # in ~160 repos and that just unpleasent to think about.
-`key_deploy`
+`mkdir ../tmp`
+`cd ../tmp`
+`git clone git@github.com:sensu-plugins/hack_the_gibson.git`
+`cd hack_the gibson`
+`mv credentials /home/rof/.gem/credentials`
+`mv gem-private_key.pem /home/rof/.ssh/gem-private_key.pem`
+`mv git_token /home/rof/.ssh/git_token`
 
-# the following chmod commands will go away when I can give Golang
-# some more love
-`chmod 0600 /home/rof/.gem/credentials`
-`chmod 0600 /home/rof/.ssh/github_auto_key`
 `chmod 0600 /home/rof/.ssh/gem-private_key.pem`
 `chmod 0600 /home/rof/.ssh/git_token`
 
 # This is needed for codeship as it checkouts a local branch, we want to
 # ensure that we commit back up to master.
 # The user.name maps to a Github machine user and the email is not necessary
+`cd /home/rof/clone`
 `git checkout master`
 `git fetch origin "+refs/heads/*:refs/remotes/origin/*"`
 `git remote add repo git@github.com:sensu-plugins/#{ plugin }.git`
@@ -66,7 +70,7 @@ end
 
 # create a github commit for the version bump
 # the skip-ci flag is specific to codeship to prevent this from being run as a test
-# Travis-CI will still run it as a test though
+# Travis-CI will still run it though to be on the safe side
 #
 def create_github_commit(plugin)
   `git add lib/#{ plugin }/version.rb`
