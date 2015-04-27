@@ -4,7 +4,6 @@ plugin = File.basename(File.expand_path('.'))
 spec = Gem::Specification.load("#{ plugin }.gemspec")
 lib = File.expand_path('../lib')
 version_file = "lib/#{ plugin }/version.rb"
-github_org = ''
 
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require_relative "../../#{ plugin }/lib/#{ plugin }"
@@ -14,17 +13,30 @@ require 'base64'
 
 ## Environment Setup
 
+# Drop the necessary keys into the build environment.
+# Environment variables are not used due to the design of codeship, each project
+# has its own set of variables so a key would need to be added or changed
+# in ~160 repos and that just unpleasent to think about.
+`key_deploy`
+
 # the following chmod commands will go away when I can give Golang
 # some more love
 `chmod 0600 /home/rof/.gem/credentials`
-`chmod 0600 /home/rof/.ssh/github-auto_key`
+`chmod 0600 /home/rof/.ssh/github_auto_key`
 `chmod 0600 /home/rof/.ssh/gem-private_key.pem`
+`chmod 0600 /home/rof/.ssh/git_token`
 
+# This is needed for codeship as it checkouts a local branch, we want to
+# ensure that we commit back up to master.
+# The user.name maps to a Github machine user and the email is not necessary
 `git checkout master`
 `git fetch origin "+refs/heads/*:refs/remotes/origin/*"`
 `git remote add repo git@github.com:sensu-plugins/#{ plugin }.git`
 `git config --global user.email 'no-op@example.com'`
 `git config --global user.name 'sensu-plugin'`
+
+# set the git api token
+github_token = File.read('/home/rof/.ssh/git_token')
 
 #
 # Build a gem and deploy it to rubygems
@@ -37,8 +49,8 @@ end
 #
 # Create Github tag and release
 #
-def create_github_release(spec, plugin)
-  `curl -H "Authorization: token #{ ENV['GITHUB_TOKEN'] }" -d '{ "tag_name": "#{ spec.version }", "target_commitish": "#{ ENV['CI_COMMIT_ID'] }", "name": "#{ spec.version }", "body": "#{ ENV['CI_MESSAGE'] }", "draft": "#{ spec.metadata['release_draft']}", "prerelease": "#{ spec.metadata['release_prerelease']}" }' https://api.github.com/repos/#{ github_org }/#{ plugin }/releases` # rubocop:disable all
+def create_github_release(spec, plugin, github_token)
+  `curl -H "Authorization: token #{ github_token }" -d '{ "tag_name": "#{ spec.version }", "target_commitish": "#{ ENV['CI_COMMIT_ID'] }", "name": "#{ spec.version }", "body": "#{ ENV['CI_MESSAGE'] }", "draft": "#{ spec.metadata['release_draft']}", "prerelease": "#{ spec.metadata['release_prerelease']}" }' https://api.github.com/repos/#{ github_org }/#{ plugin }/releases` # rubocop:disable all
 end
 
 #
@@ -62,11 +74,9 @@ def create_github_commit(plugin)
   `git push repo master`
 end
 
-end
-
 if ENV['CI_MESSAGE'] == 'deploy'
   version_bump(version_file)
   create_github_commit(plugin)
   deploy_rubygems(spec, plugin)
-  create_github_release(spec, plugin)
+  create_github_release(spec, plugin, github_token)
 end

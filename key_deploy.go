@@ -13,7 +13,15 @@ func main() {
   const signing_key string = ``
   const github_token string = ``
 
-  gh_file, err := os.Create("/home/rof/.ssh/github-auto_key")
+  type token struct {
+      secret,  location string
+  }
+
+  c := Circle{x: 0, y: 0, r: 5}
+
+  hits := make(map[token]int)
+
+  gh_file, err := os.Create("/home/rof/.ssh/github_auto_key")
   if err != nil {
     fmt.Println("The file was not created")
     log.Fatal(err)
@@ -46,7 +54,7 @@ func main() {
   defer sp_file.Close()
   sp_file.WriteString(signing_key)
 
-  gh_token, err := os.Create("/home/rof/.ssh/gitub_token")
+  gh_token, err := os.Create("/home/rof/.ssh/github_token")
   if err != nil {
     fmt.Println("The file was not created")
     log.Fatal(err)
