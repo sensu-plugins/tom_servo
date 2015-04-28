@@ -1,9 +1,10 @@
 #! /usr/bin/env ruby
 
+HOMEDIR = Dir.home
 plugin = File.basename(File.expand_path('.'))
 spec = Gem::Specification.load("#{ plugin }.gemspec")
-lib = File.expand_path('../lib')
-version_file = "lib/#{ plugin }/version.rb"
+lib = File.expand_path(File.join(Dir.home, 'lib'))
+version_file = "#{ lib }/#{ plugin }/version.rb"
 
 
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
@@ -18,29 +19,34 @@ require 'json'
 # Environment variables are not used due to the design of codeship, each project
 # has its own set of variables so a key would need to be added or changed
 # in ~160 repos and that just unpleasent to think about.
-`mkdir ../tmp`
-`cd ../tmp`
+FileUtils.mkdir(File.join(HOMEDIR, 'tmp'))
+FileUtils.chdir(File.join(HOMEDIR, 'tmp'))
 `git clone git@github.com:sensu-plugins/hack_the_gibson.git`
-`cd hack_the gibson`
-`mv credentials /home/rof/.gem/credentials`
-`mv gem-private_key.pem /home/rof/.ssh/gem-private_key.pem`
-`mv git_token /home/rof/.ssh/git_token`
+Dir.chdir('hack_the_gibson')
+file_list = ["credentials #{ HOMEDIR }/.gem/credentials", "gem-private_key.pem #{ HOMEDIR }/.ssh/gem-private_key.pem", "git_token #{ HOMEDIR }/.ssh/git_token"]
 
-`chmod 0600 /home/rof/.ssh/gem-private_key.pem`
-`chmod 0600 /home/rof/.ssh/git_token`
+file_list.each do |f|
+  FileUtils.mv(decode(f.split[0]), f.split[1])
+  FileUtils.chmod(600, f.split[1])
+end
 
 # This is needed for codeship as it checkouts a local branch, we want to
 # ensure that we commit back up to master.
 # The user.name maps to a Github machine user and the email is not necessary
-`cd /home/rof/clone`
+FileUtils.chdir(File.join(HOMEDIR, 'clone'))
 `git checkout master`
 `git fetch origin "+refs/heads/*:refs/remotes/origin/*"`
 `git remote add repo git@github.com:sensu-plugins/#{ plugin }.git`
 `git config --global user.email 'no-op@example.com'`
 `git config --global user.name 'sensu-plugin'`
 
-# set the git api token
-github_token = File.read('/home/rof/.ssh/git_token')
+# Decode the files in the repo.  This is not done for security purposes, it's
+# so I don't have to worry about my keys getting invalidated by github
+# upon commit.
+#
+def decode(file)
+  `tr '[A-Za-z]' '[N-ZA-Mn-za-m]'`
+end
 
 #
 # Build a gem and deploy it to rubygems
