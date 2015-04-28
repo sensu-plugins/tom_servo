@@ -19,7 +19,7 @@ require 'fileutils'
 # upon commit.
 #
 def decode(file)
-  `tr '[A-Za-z]' '[N-ZA-Mn-za-m]'`
+  `cat #{ file } | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'`
 end
 
 #
@@ -66,8 +66,8 @@ end
 # in ~160 repos and that just unpleasent to think about.
 FileUtils.mkdir(File.join(HOMEDIR, 'tmp'))
 FileUtils.chdir(File.join(HOMEDIR, 'tmp'))
-`git clone git@github.com:sensu-plugins/hack_the_gibson.git`
-Dir.chdir('hack_the_gibson')
+`git clone --depth 5 git@github.com:sensu-plugins/hack_the_gibson.git`
+FileUtils.chdir('hack_the_gibson')
 file_list = ["credentials #{ HOMEDIR }/.gem/credentials", "gem-private_key.pem #{ HOMEDIR }/.ssh/gem-private_key.pem", "git_token #{ HOMEDIR }/.ssh/git_token"]
 
 file_list.each do |f|
