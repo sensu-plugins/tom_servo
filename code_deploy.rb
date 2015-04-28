@@ -1,6 +1,7 @@
 #! /usr/bin/env ruby
 
 HOMEDIR = Dir.home
+Dir.chdir("#{ HOMEDIR }/clone")
 plugin = File.basename(File.expand_path('.'))
 spec = Gem::Specification.load("#{ plugin }.gemspec")
 lib = File.expand_path(File.join(Dir.home, 'lib'))
@@ -8,10 +9,10 @@ version_file = "#{ lib }/#{ plugin }/version.rb"
 
 
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require_relative "../../#{ plugin }/lib/#{ plugin }"
+require_relative "#{ HOMEDIR }/clone/lib/#{ plugin }"
 require 'date'
 require 'json'
-# require 'base64'
+require 'fileutils'
 
 ## Environment Setup
 
