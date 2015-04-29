@@ -47,7 +47,7 @@ end
 # end
 
 def version_bump(version_file)
-  bump = patch
+  bump = 'patch'
   ver = File.read(version_file).match(/\d+\.\d+\.\d+/).to_s.split('.')
   major = ver[0].to_i
   minor = ver[1].to_i
