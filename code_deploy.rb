@@ -19,7 +19,7 @@ require 'fileutils'
 #
 def deploy_rubygems(spec, plugin)
   puts " this is the version string #{ SensuPluginsApache::Version::VER_STRING }"
-  puts " this is the version string #{ `cat /home/.rof/clone/lib/sensu-plugins-apache/version.rb` }"  
+  puts " this is the version string #{ `cat /home/rof/clone/lib/sensu-plugins-apache/version.rb` }"  
   puts "this is the deploy gem stuff"
   puts `rm *.gem`
   puts `gem build #{ plugin }.gemspec`
