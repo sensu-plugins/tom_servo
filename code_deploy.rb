@@ -49,9 +49,6 @@ def create_github_commit(plugin)
   `git push repo master`
 end
 
-# Drop the needed keys and certs
-`ruby key_deploy.rb`
-
 # This is needed for codeship as we want to ensure that we commit back
 # up to master.
 # The user.name maps to a Github machine user and the email is not necessary
