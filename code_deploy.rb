@@ -3,10 +3,12 @@
 # Set the paths.
 HOMEDIR = Dir.home
 Dir.chdir("#{ HOMEDIR }/clone")
+
 plugin = File.basename(File.expand_path('.'))
 spec = Gem::Specification.load("#{ plugin }.gemspec")
 lib = File.expand_path(File.join(Dir.home, 'clone/lib'))
 version_file = "#{ lib }/#{ plugin }/version.rb"
+github_token = File.read('/home/rof/.ssh/git_token')
 
 # Load what we need
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
