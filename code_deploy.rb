@@ -64,6 +64,6 @@ if ENV['CI_MESSAGE'] == 'deploy'
   version_bump(version_file)
   spec = Gem::Specification.load("#{ plugin }.gemspec")
   create_github_commit(plugin)
-  puts deploy_rubygems(spec, plugin)
-  puts create_github_release(spec, plugin, github_token)
+  deploy_rubygems(spec, plugin)
+  create_github_release(spec, plugin, github_token)
 end
