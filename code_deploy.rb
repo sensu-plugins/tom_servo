@@ -18,15 +18,17 @@ require 'fileutils'
 # Build a gem and deploy it to rubygems
 #
 def deploy_rubygems(spec, plugin)
-  `*.gem`
-  `gem build #{ plugin }.gemspec`
-  `gem push #{ spec.full_name }.gem`
+  puts "this is the deploy gem stuff"
+  puts `rm *.gem`
+  puts `gem build #{ plugin }.gemspec`
+  puts `gem push #{ spec.full_name }.gem`
 end
 
 #
 # Create Github tag and release
 #
 def create_github_release(spec, plugin, github_token)
+  puts " this is the git log"
   puts `curl -H "Authorization: token #{ github_token }" -d '{ "tag_name": "#{ spec.version }", "target_commitish": "#{ ENV['CI_COMMIT_ID'] }", "name": "#{ spec.version }", "body": "#{ ENV['CI_MESSAGE'] }", "draft": "#{ spec.metadata['release_draft']}", "prerelease": "#{ spec.metadata['release_prerelease']}" }' https://api.github.com/repos/sensu-plugins/#{ plugin }/releases` # rubocop:disable all
 end
 
@@ -65,7 +67,7 @@ if ENV['CI_MESSAGE'] == 'deploy'
   version_bump(version_file)
   create_github_commit(plugin)
   spec = Gem::Specification.load("#{ plugin }.gemspec")
-  puts spec.full_name
+  puts " this is the full name of the gem #{ spec.full_name }"
   puts `ls`
   deploy_rubygems(spec, plugin)
   create_github_release(spec, plugin, github_token)
