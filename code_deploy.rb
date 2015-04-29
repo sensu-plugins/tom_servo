@@ -68,8 +68,8 @@ FileUtils.chdir(File.join(HOMEDIR, 'clone'))
 `git config --global user.name 'sensu-plugin'`
 
 if ENV['CI_MESSAGE'] == 'deploy'
-  version_bump(version_file)
-  create_github_commit(plugin)
+  # version_bump(version_file)
+  # create_github_commit(plugin)
   spec = Gem::Specification.load("#{ plugin }.gemspec")
   puts " this is the full name of the gem #{ spec.full_name }"
   puts " this is the file name of the gem #{ spec.file_name }"
