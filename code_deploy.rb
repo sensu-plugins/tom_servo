@@ -18,15 +18,15 @@ require 'fileutils'
 # Build a gem and deploy it to rubygems
 #
 def deploy_rubygems(spec, plugin)
-  `gem build #{ plugin }.gemspec`
-  `gem push #{ spec.full_name }.gem`
+  puts `gem build #{ plugin }.gemspec`
+  puts `gem push #{ spec.full_name }.gem`
 end
 
 #
 # Create Github tag and release
 #
 def create_github_release(spec, plugin, github_token)
-  `curl -H "Authorization: token #{ github_token }" -d '{ "tag_name": "#{ spec.version }", "target_commitish": "#{ ENV['CI_COMMIT_ID'] }", "name": "#{ spec.version }", "body": "#{ ENV['CI_MESSAGE'] }", "draft": "#{ spec.metadata['release_draft']}", "prerelease": "#{ spec.metadata['release_prerelease']}" }' https://api.github.com/repos/sensu-plugins/#{ plugin }/releases` # rubocop:disable all
+  puts `curl -H "Authorization: token #{ github_token }" -d '{ "tag_name": "#{ spec.version }", "target_commitish": "#{ ENV['CI_COMMIT_ID'] }", "name": "#{ spec.version }", "body": "#{ ENV['CI_MESSAGE'] }", "draft": "#{ spec.metadata['release_draft']}", "prerelease": "#{ spec.metadata['release_prerelease']}" }' https://api.github.com/repos/sensu-plugins/#{ plugin }/releases` # rubocop:disable all
 end
 
 #
