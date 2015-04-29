@@ -21,6 +21,8 @@ def deploy_rubygems(spec, plugin)
   puts "this is the deploy gem stuff"
   puts `rm *.gem`
   puts `gem build #{ plugin }.gemspec`
+  puts "this is the ls inside the gem loop"
+  puts `ls`
   puts `gem push #{ spec.full_name }.gem`
 end
 
@@ -68,6 +70,7 @@ if ENV['CI_MESSAGE'] == 'deploy'
   create_github_commit(plugin)
   spec = Gem::Specification.load("#{ plugin }.gemspec")
   puts " this is the full name of the gem #{ spec.full_name }"
+  puts "this is the version #{ spec.version }"
   puts `ls`
   deploy_rubygems(spec, plugin)
   create_github_release(spec, plugin, github_token)
