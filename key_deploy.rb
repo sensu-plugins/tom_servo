@@ -25,8 +25,7 @@ FileUtils.chdir(File.join(HOMEDIR, 'tmp'))
 FileUtils.chdir('hack_the_gibson')
 
 file_list = ["#{ FileUtils.pwd }/keys/credentials #{ HOMEDIR }/.gem/credentials",
-             "#{ FileUtils.pwd }/keys/gem-private_key.pem #{ HOMEDIR }/.ssh/gem-priv
-ate_key.pem",
+             "#{ FileUtils.pwd }/keys/gem-private_key.pem #{ HOMEDIR }/.ssh/gem-private_key.pem",
              "#{ FileUtils.pwd }/keys/git_token #{ HOMEDIR }/.ssh/git_token"]
 
 file_list.each do |f|
