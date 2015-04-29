@@ -5,7 +5,7 @@ HOMEDIR = Dir.home
 Dir.chdir("#{ HOMEDIR }/clone")
 plugin = File.basename(File.expand_path('.'))
 spec = Gem::Specification.load("#{ plugin }.gemspec")
-lib = File.expand_path(File.join(Dir.home, 'lib'))
+lib = File.expand_path(File.join(Dir.home, 'clone/lib'))
 version_file = "#{ lib }/#{ plugin }/version.rb"
 
 # Load what we need
