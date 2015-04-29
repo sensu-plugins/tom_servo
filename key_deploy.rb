@@ -31,5 +31,5 @@ ate_key.pem",
 
 file_list.each do |f|
   FileUtils.mv(decode(f.split[0]), f.split[1])
-  FileUtils.chmod(600, f.split[1])
+  FileUtils.chmod(0600, f.split[1])
 end
