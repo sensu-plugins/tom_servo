@@ -60,7 +60,7 @@ def version_bump(version_file)
   when 'major'
     major += 1
   end
-  major.minor.patch
+  "#{ major }.#{ minor }.#{ patch }"
 end
 
 
