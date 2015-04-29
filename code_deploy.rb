@@ -5,7 +5,6 @@ HOMEDIR = Dir.home
 Dir.chdir("#{ HOMEDIR }/clone")
 
 plugin = File.basename(File.expand_path('.'))
-spec = Gem::Specification.load("#{ plugin }.gemspec")
 lib = File.expand_path(File.join(Dir.home, 'clone/lib'))
 version_file = "#{ lib }/#{ plugin }/version.rb"
 github_token = File.read('/home/rof/.ssh/git_token')
@@ -62,6 +61,7 @@ FileUtils.chdir(File.join(HOMEDIR, 'clone'))
 `git config --global user.name 'sensu-plugin'`
 
 if ENV['CI_MESSAGE'] == 'deploy'
+  spec = Gem::Specification.load("#{ plugin }.gemspec")
   version_bump(version_file)
   create_github_commit(plugin)
   deploy_rubygems(spec, plugin)
