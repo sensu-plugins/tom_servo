@@ -18,8 +18,9 @@ require 'fileutils'
 # Build a gem and deploy it to rubygems
 #
 def deploy_rubygems(spec, plugin)
-  puts `gem build #{ plugin }.gemspec`
-  puts `gem push #{ spec.full_name }.gem`
+  `*.gem`
+  `gem build #{ plugin }.gemspec`
+  `gem push #{ spec.full_name }.gem`
 end
 
 #
