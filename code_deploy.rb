@@ -6,7 +6,7 @@ Dir.chdir("#{ HOMEDIR }/clone")
 
 plugin = File.basename(File.expand_path('.'))
 lib = File.expand_path(File.join(Dir.home, 'clone/lib'))
-version_file = "#{ lib }/#{ plugin }.rb"
+version_file = "#{ lib }/#{ plugin }/version.rb"
 github_token = File.read('/home/rof/.ssh/git_token')
 
 # Load what we need
@@ -18,8 +18,8 @@ require 'fileutils'
 # Build a gem and deploy it to rubygems
 #
 def deploy_rubygems(spec, plugin)
-  # puts " this is the version string #{ SensuPluginsApache::Version::VER_STRING }"
-  puts " this is the version string #{ `cat /home/rof/clone/lib/sensu-plugins-apache.rb` }"
+  puts " this is the version string #{ SensuPluginsApache::Version::VER_STRING }"
+  puts " this is the version string #{ `cat /home/rof/clone/lib/sensu-plugins-apache/version.rb` }"
   puts "this is the deploy gem stuff"
   puts `rm *.gem`
   puts `gem build #{ plugin }.gemspec`
@@ -39,31 +39,13 @@ end
 #
 # Bump the patch version of the plugin
 #
-# def version_bump(version_file)
-#     Dir.chdir(acquire_chdir_path)
-#     text = File.read("lib/#{@gem_root}.rb")
-#     File.write("lib/#{@gem_root}.rb", text.gsub(/\d+\.\d+\.\d+/, new_version(text, bump)))
-#
-# end
-
 def version_bump(version_file)
-  bump = 'patch'
-  ver = File.read(version_file).match(/\d+\.\d+\.\d+/).to_s.split('.')
-  major = ver[0].to_i
-  minor = ver[1].to_i
-  patch = ver[2].to_i
-  case bump
-  when 'patch'
-    patch += 1
-  when 'minor'
-    minor += 1
-  when 'major'
-    major += 1
-  end
-  "#{ major }.#{ minor }.#{ patch }"
+  # Read the file, bump the PATCH version
+  contents = File.read(version_file).gsub(/(PATCH = )(\d+)/) { |_| Regexp.last_match[1] + (Regexp.last_match[2].to_i + 1).to_s }
+
+  # Write the new contents of the file
+  File.open(version_file, 'w') { |file| file.puts contents }
 end
-
-
 
 # create a github commit for the version bump
 # the skip-ci flag is specific to codeship to prevent this from being run as a test
