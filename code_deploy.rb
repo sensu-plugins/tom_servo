@@ -62,8 +62,10 @@ FileUtils.chdir(File.join(HOMEDIR, 'clone'))
 
 if ENV['CI_MESSAGE'] == 'deploy'
   version_bump(version_file)
-  spec = Gem::Specification.load("#{ plugin }.gemspec")
   create_github_commit(plugin)
+  spec = Gem::Specification.load("#{ plugin }.gemspec")
+  puts spec.full_name
+  puts `ls`
   deploy_rubygems(spec, plugin)
   create_github_release(spec, plugin, github_token)
 end
