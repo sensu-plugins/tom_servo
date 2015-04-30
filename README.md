@@ -37,3 +37,8 @@ rake deploy:deploy
 Create a new rake task file and namespace if needed or add a new task to one of the current task files.  There is no need to modify the root `RakeFile` as long as you follow the current layout.
 
 When adding tasks please keep in mind the [Unix Philosophy](http://www.faqs.org/docs/artu/ch01s06.html), of do one task and do it well.  Your code should be abstracted out as much as makes sense.  It should also be kept in mind that currently there are nearly 175 plugin repos that use these tasks.  Make sure you plan for scale, avoid hardcoding ANYTHING if possible and make sure all paths use Ruby methods to ensure portability.
+
+### Additional Information
+
+[Build And Release Pipeline](https://github.com/sensu-plugins/documentation/blob/master/infra/b_and_r.md)
+[Testing Pipeline](https://github.com/sensu-plugins/documentation/blob/master/infra/testing.md)
