@@ -3,7 +3,7 @@ def define_plugin
 end
 
 def load_specs
-  puts Gem::Specification.load("#{ PROJECT_ROOT }/#{ define_plugin }.gemspec")
+  Gem::Specification.load("#{ PROJECT_ROOT }/#{ define_plugin }.gemspec")
 end
 
 def deploy_setup
