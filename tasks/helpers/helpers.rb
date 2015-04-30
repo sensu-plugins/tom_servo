@@ -14,3 +14,13 @@ def deploy_setup
   `git config --global user.email #{ DEPLOY_EMAIL }`
   `git config --global user.name #{ DEPLOY_USER }`
 end
+
+# Decode the files in the repo.  This is not done for security purposes, it's
+# so I don't have to worry about my keys getting invalidated by github
+# upon commit.
+#
+def decode(file)
+  t = '/tmp/t'
+  `cat #{ file } | tr '[A-Za-z]' '[N-ZA-Mn-za-m]' > #{ t }`
+  t
+end
