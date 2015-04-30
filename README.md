@@ -41,4 +41,5 @@ When adding tasks please keep in mind the [Unix Philosophy](http://www.faqs.org/
 ### Additional Information
 
 [Build And Release Pipeline](https://github.com/sensu-plugins/documentation/blob/master/infra/b_and_r.md)
+
 [Testing Pipeline](https://github.com/sensu-plugins/documentation/blob/master/infra/testing.md)
