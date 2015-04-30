@@ -1,7 +1,7 @@
 require 'fileutils'
 
 # Load our rake configuration
-require File.expand_path('config/rake', __FILE__)
+require File.expand_path('config/rake')#, __FILE__)
 
 # Load our helper files
 Dir[File.join(File.dirname(__FILE__), 'tasks', 'helpers', '*.rb')].sort.each do |h|

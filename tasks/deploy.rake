@@ -9,3 +9,4 @@ namespace :deploy do
       Rake::Task['github:create_github_release'].invoke
     end
   end
+end
