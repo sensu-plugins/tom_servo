@@ -2,7 +2,7 @@
 
 ## Tom Servo
 
-Tom Servo is our deployment pipeline.  His job is top make our lives easy.  All deployment scripts, code, tools will be handled by him.  
+Tom Servo is our testing and deployment tool.  His job is top make our lives easy.  All deployment scripts, code, and tooling will be handled by him.  
 
 Due to the way Codeship works, deployment and testing commands would need to be set in each repo....all 160+ of them.  This is not fun in any way, shape, or form, so Tom helps us out with that.  Each repo only has a single deployment task, this ensures we never have to modify the Codeship deployment pipeline if we change deployment methods, add/remove steps, etc.  
 
