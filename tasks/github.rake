@@ -1,5 +1,4 @@
 namespace :github do
-
   #
   # Create Github tag and release
   #

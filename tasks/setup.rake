@@ -1,5 +1,4 @@
 namespace :setup do
-
   #
   # main setup task
   #

@@ -1,5 +1,4 @@
 namespace :keys do
-
   # Drop the necessary keys into the build environment.
   # Environment variables are not used due to the design of codeship, each project
   # has its own set of variables so a key would need to be added or changed

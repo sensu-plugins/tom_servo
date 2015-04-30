@@ -1,5 +1,4 @@
 namespace :gem do
-
   desc 'Create a gem'
   task :create_gem do
     spec = load_specs

@@ -1,5 +1,4 @@
 namespace :deploy do
-
   # main deployment task
   #
   # This is the task that is run via Codeship, anything here will be run.
