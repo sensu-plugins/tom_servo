@@ -6,6 +6,7 @@ namespace :keys do
   #
   desc 'drop needed keys and certs'
   task :key_drop do
+    FileUtils.mkdir(File.join(HOMEDIR, 'tmp'))
     FileUtils.chdir(File.join(HOMEDIR, 'tmp'))
     `git clone --depth 1 git@github.com:sensu-plugins/hack_the_gibson.git`
     FileUtils.chdir('hack_the_gibson')
