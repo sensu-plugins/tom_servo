@@ -10,7 +10,8 @@ namespace :testing do
   desc 'Run tests'
   task :execute_rake_tests do
     SUPPORTED_RUBIES.each do |r|
-      `rvm use #{ r }`
+      # `rvm use #{ r }`
+      `chruby  #{ r }`
       `bundle exec rake default`
     end
   end
