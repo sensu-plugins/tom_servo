@@ -17,7 +17,7 @@ namespace :testing do
 
   desc 'Build and install a gem'
   task :execute_gem_tests do
-    Rake::Task['gem:create_gem'].invoke
+    `gem build *.gemspec`
     `gem install *.gem`
   end
 end
