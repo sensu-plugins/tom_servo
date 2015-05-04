@@ -12,7 +12,7 @@ namespace :setup do
   task :install_ruby do
     FileUtils.chdir(PROJECT_ROOT)
     SUPPORTED_RUBIES.each do |r|
-      `#{ HOMEDIR }/tmp/ruby-install-0.5.0/bin/ruby-install --install-dir #{ HOMEDIR }/.rubies ruby #{ r }`
+      `../tmp/ruby-install-0.5-0/bin/ruby-install ruby #{ r }`
       # `rvm use #{ r } --install`
       `gem install bundler`
       `bundle install`
