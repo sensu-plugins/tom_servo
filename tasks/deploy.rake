@@ -14,4 +14,12 @@ namespace :deploy do
       Rake::Task['github:create_github_release'].invoke
     end
   end
+
+  desc 'deploy the documentation'
+  task deploy_docs do
+    if ENV['CI_MESSAGE']  == 'deploy'
+      deploy_setup
+      Rake::Task['github:push_repo'].invoke
+    end
+  end
 end

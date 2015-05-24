@@ -24,4 +24,21 @@ namespace :github do
     `git commit -m 'version bump --skip-ci'`
     `git push repo master`
   end
+
+  #
+  # push_repo
+  #
+  # create a standard github commit and push to the repo
+  # the skip-ci flag is specific to codeship to prevent this from being run as a test
+  # Travis-CI will still run it though to be on the safe side if enabled
+  #
+  desc 'Push to Github'
+  task :push_repo do
+    plugin = define_plugin
+    `git add --all`
+    `git commit -m 'documentation deployment --skip-ci'`
+    `git push repo master`
+  end
+end
+
 end
