@@ -34,11 +34,9 @@ namespace :github do
   #
   desc 'Push to Github'
   task :push_repo do
-    plugin = define_plugin
+    # plugin = define_plugin
     `git add --all`
     `git commit -m 'documentation deployment --skip-ci'`
     `git push repo master`
   end
-end
-
 end
