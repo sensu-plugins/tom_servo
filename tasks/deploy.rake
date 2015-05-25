@@ -15,6 +15,12 @@ namespace :deploy do
     end
   end
 
+  # deployment task for plugins documentation
+  #
+  # The documentation lives in a seperate repo and when it gets commited to by
+  # a committer this will pull the site repo, copy the new docs into it and
+  # then push it back up, causing Travis to rebuild the site.
+  #
   desc 'deploy the documentation'
   task :deploy_docs do
     if ENV['CI_MESSAGE'] == 'deploy'

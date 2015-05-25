@@ -28,7 +28,7 @@ namespace :github do
   #
   # push_repo
   #
-  # create a standard github commit and push to the repo
+  # create a standard github commit and push new documentation to the site repo
   # the skip-ci flag is specific to codeship to prevent this from being run as a test
   # Travis-CI will still run it though to be on the safe side if enabled
   #
