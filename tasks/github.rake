@@ -34,6 +34,7 @@ namespace :github do
   #
   desc 'Push to Github'
   task :push_site_repo do
+    FileUtils.chdir(SITE_REPO)
     `git add --all`
     `git commit -m 'documentation deployment --skip-ci'`
     `git push origin master`
