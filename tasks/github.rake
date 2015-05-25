@@ -33,10 +33,9 @@ namespace :github do
   # Travis-CI will still run it though to be on the safe side if enabled
   #
   desc 'Push to Github'
-  task :push_repo do
-    # plugin = define_plugin
+  task :push_site_repo do
     `git add --all`
     `git commit -m 'documentation deployment --skip-ci'`
-    `git push repo master`
+    `git push origin master`
   end
 end

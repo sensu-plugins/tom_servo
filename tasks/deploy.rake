@@ -18,12 +18,12 @@ namespace :deploy do
   desc 'deploy the documentation'
   task :deploy_docs do
     if ENV['CI_MESSAGE'] == 'deploy'
+      docs = File.join(PROJECT_ROOT, '*')
       deploy_setup
       FileUtils.chdir(HOMEDIR)
       `git clone git@github.com:sensu-plugins/#{ SITE_REPO }.git`
-      # FileUtils.chdir(SITE_REPO)
-      FileUtils.cp_r("#{ PROJECT_ROOT }/*", "#{ SITE_REPO }/documentation")
-      # Rake::Task['github:push_repo'].invoke
+      FileUtils.cp_r(Dir.glob(docs), "#{ SITE_REPO }/documentation")
+      Rake::Task['github:push_site_repo'].invoke
     end
   end
 end
