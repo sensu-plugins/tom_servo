@@ -16,7 +16,7 @@ namespace :deploy do
   end
 
   desc 'deploy the documentation'
-  task deploy_docs do
+  task :deploy_docs do
     if ENV['CI_MESSAGE'] == 'deploy'
       deploy_setup
       FileUtils.chdir(HOMEDIR)
