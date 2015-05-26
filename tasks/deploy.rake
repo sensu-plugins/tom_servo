@@ -29,7 +29,7 @@ namespace :deploy do
       FileUtils.chdir(HOMEDIR)
       `git clone git@github.com:sensu-plugins/#{ SITE_REPO }.git`
       # need to clean all files before copying in new ones
-      FileUtils.cp_r(Dir.glob(docs), File.join(SITE_REPO, '_docs')
+      FileUtils.cp_r(Dir.glob(docs), File.join(SITE_REPO, '_docs'))
       Rake::Task['github:push_site_repo'].invoke
     end
   end
