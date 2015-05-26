@@ -24,7 +24,7 @@ namespace :deploy do
   desc 'deploy the documentation'
   task :deploy_docs do
     if ENV['CI_MESSAGE'] == 'deploy'
-      docs = File.join(PROJECT_ROOT, 'docs', '*')
+      docs = File.join(PROJECT_ROOT, '_docs', '*')
       deploy_setup
       FileUtils.chdir(HOMEDIR)
       `git clone git@github.com:sensu-plugins/#{ SITE_REPO }.git`
