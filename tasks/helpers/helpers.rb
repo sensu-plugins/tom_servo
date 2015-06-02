@@ -53,3 +53,15 @@ def decode(file)
   `cat #{ file } | tr '[A-Za-z]' '[N-ZA-Mn-za-m]' > #{ t }`
   t
 end
+
+def test_gem_bin
+  spec = load_specs
+  bin_list = spec.executables
+
+  bin_list.each do |b|
+    `which |b|`
+    if ! $?.success?
+      puts "#{ b } was not a binstub"
+      exit
+    end
+  end
