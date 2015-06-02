@@ -17,5 +17,6 @@ namespace :test do
   desc 'test for binstubs'
   task :test_binstubs do
     test_gem_bin
+    FileUtils.chdir(PROJECT_ROOT)
   end
 end

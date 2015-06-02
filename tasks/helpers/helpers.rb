@@ -55,7 +55,6 @@ def decode(file)
 end
 
 def test_gem_bin
-  FileUtils.chdir(PROJECT_ROOT)
   bin_list = load_specs.executables
 
   bin_list.each do |b|
