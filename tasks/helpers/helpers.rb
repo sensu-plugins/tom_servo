@@ -55,8 +55,7 @@ def decode(file)
 end
 
 def test_gem_bin
-  spec = load_specs
-  bin_list = spec.executables
+  bin_list = load_specs.executables
 
   bin_list.each do |b|
     `which |b|`

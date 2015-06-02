@@ -4,6 +4,7 @@ namespace :test do
   task :test do
     plugin = define_plugin
     spec = load_specs
+    FileUtils.chdir(PROJECT_ROOT)
     RUBY_VERSIONS.each do |r|
       `rvm use #{ r }`
       `bundle exec rake default`
