@@ -59,7 +59,7 @@ def test_gem_bin
   bin_list = load_specs.executables
 
   bin_list.each do |b|
-    `which |b|`
+    `which #{ b }`
     if ! $?.success?
       puts "#{ b } was not a binstub"
       exit
