@@ -2,7 +2,7 @@ namespace :test do
 
   desc 'standard tests for all repos'
   task :ts_tests do
-    Rake::Task['keys:test_binstubs'].invoke
+    Rake::Task['test:test_binstubs'].invoke
     # plugin = define_plugin
     # spec = load_specs
     # FileUtils.chdir(PROJECT_ROOT)
