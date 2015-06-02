@@ -12,11 +12,11 @@ namespace :test do
     #   `gem build #{ plugin }.gemspec`
     #   `gem install #{ spec.full_name}.gem`
     #   test_gem_bin
-    end
+  end
 
   desc 'test for binstubs'
   task :test_binstubs do
-    FileUtils.chdir(PROJECT_ROOT)
     test_gem_bin
     end
   end
+end
