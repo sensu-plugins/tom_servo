@@ -54,6 +54,11 @@ def decode(file)
   t
 end
 
+#
+# test_gem_bin
+#
+# Test to make sure binstubs were created for each binary file.
+#
 def test_gem_bin
   bin_list = load_specs.executables
 
