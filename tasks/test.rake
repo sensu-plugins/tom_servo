@@ -17,6 +17,5 @@ namespace :test do
   desc 'test for binstubs'
   task :test_binstubs do
     test_gem_bin
-    end
   end
 end
