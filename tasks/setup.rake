@@ -14,7 +14,7 @@ namespace :setup do
   task :setup_ruby_env do
     RUBY_VERSIONS.each do |r|
       `rvm use #{ r } --install`
-      `gem install bundler`
+      
       `bundle install`
     end
   end
