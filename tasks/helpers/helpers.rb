@@ -64,3 +64,4 @@ def test_gem_bin
       exit
     end
   end
+end
