@@ -1,5 +1,4 @@
 namespace :test do
-
   desc 'standard tests for all repos'
   task :ts_tests do
     Rake::Task['test:test_binstubs'].invoke

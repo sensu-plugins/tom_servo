@@ -64,7 +64,7 @@ def test_gem_bin
 
   bin_list.each do |b|
     `which #{ b }`
-    if ! $?.success?
+    unless $CHILD_STATUS.success?
       puts "#{ b } was not a binstub"
       exit
     end

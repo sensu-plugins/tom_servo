@@ -10,5 +10,4 @@ DEPLOY_EMAIL    = 'sensu-plugin@sensu-plugins.io'
 
 SITE_REPO       = 'sensu-plugins.github.io'
 
-
 RUBY_VERSIONS   = ['1.9.3', '2.0', '2.1', '2.2']
