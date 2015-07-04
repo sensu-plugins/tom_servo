@@ -13,7 +13,7 @@ namespace :deploy do
       Rake::Task['gem:create_gem'].invoke
       Rake::Task['gem:push_gem'].invoke
       Rake::Task['github:create_github_release'].invoke
-    end
+    #end
   end
 
   # deployment task for plugins documentation
