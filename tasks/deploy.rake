@@ -7,7 +7,7 @@ namespace :deploy do
   #
   desc 'deploy'
   task :deploy do
-    if ENV['CI_MESSAGE'] == 'deploy'
+    # if ENV['CI_MESSAGE'] == 'deploy'
       deploy_setup
       Rake::Task['version:bump_patch'].invoke
       Rake::Task['gem:create_gem'].invoke
