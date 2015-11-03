@@ -10,7 +10,7 @@ Due to the way Codeship works, deployment and testing commands would need to be 
 ### Usage
 
 1. ensure all tests pass (the deploy won't happen if this fails)
-1. edit the CHNAGELOG.md following the conventions laid out in [Keep A Changelog](http://keepachangelog.com/)
+1. edit the CHANGELOG.md following the conventions laid out in [Keep A Changelog](http://keepachangelog.com/)
 1. bump the version in *../lib/plugin/version.rb*
 1. commit ONLY those two items with a message of **deploy**
 
